@@ -1,0 +1,12 @@
+debug: false
+
+management:
+  security:
+    enabled: false
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: bpm-webapp

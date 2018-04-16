@@ -1,0 +1,11 @@
+---
+applications:
+- name: hello-flow
+  path: target/simple-bpm-0.0.2-SNAPSHOT.jar
+  memory: 1G
+  instances: 1
+  random-route: false
+  services:
+  - camunda-db
+  - config-server
+  - service-registry

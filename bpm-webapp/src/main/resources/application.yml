@@ -1,0 +1,50 @@
+config:
+  name: greetings-client
+  info: Client micro serive auto discovered by eureka
+
+spring:
+  application:
+    name: bpm-webapp
+  cloud:
+    config:
+      enabled: true
+
+camunda:
+  bpm:
+    webapp:
+      index-redirect-enabled: true
+    admin-user:
+      id: kermit
+      password: Muppets2018
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false
+
+eureka:
+  client:
+    region: default
+    registryFetchIntervalSeconds: 5
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    nonSecurePort: 80
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    leaseRenewalIntervalInSeconds: 5
+
+---
+spring:
+  profiles: default
+  datasource:
+    url: jdbc:h2:~/h2_camunda:example-simple;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+# jdbc:h2:mem:example-simple;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+---
+spring:
+  profiles: cloud

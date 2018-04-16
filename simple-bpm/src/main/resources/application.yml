@@ -1,0 +1,50 @@
+config:
+  name: hello-bpm
+  info: Client micro serive auto discovered by eureka
+
+endpoints:
+  restart:
+    enabled: true
+
+spring:
+  application:
+    name: hello-bpm
+  cloud:
+    config:
+      enabled: true
+
+eureka:
+  client:
+    region: default
+    register-with-eureka: true
+    registryFetchIntervalSeconds: 5
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    nonSecurePort: 80
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    leaseRenewalIntervalInSeconds: 5
+
+camunda:
+  bpm:
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false
+
+---
+spring:
+  profiles: default
+  datasource:
+    url: jdbc:h2:~/h2_camunda:example-simple;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+ 
+---
+spring:
+  profiles: cloud
