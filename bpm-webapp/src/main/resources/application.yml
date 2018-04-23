@@ -5,9 +5,9 @@ config:
 spring:
   application:
     name: bpm-webapp
-  cloud:
-    config:
-      enabled: true
+#  cloud:
+#    config:
+#      enabled: true
 
 camunda:
   bpm:
@@ -38,6 +38,10 @@ eureka:
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
     leaseRenewalIntervalInSeconds: 5
+
+security:
+  basic:
+    enabled: false
 
 ---
 spring:
