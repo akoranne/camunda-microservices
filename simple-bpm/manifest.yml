@@ -7,5 +7,4 @@ applications:
   random-route: false
   services:
   - camunda-db
-  - config-server
-  - service-registry
+  - registry

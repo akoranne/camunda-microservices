@@ -9,9 +9,9 @@ endpoints:
 spring:
   application:
     name: hello-bpm
-  cloud:
-    config:
-      enabled: true
+#  cloud:
+#    config:
+#      enabled: true
 
 eureka:
   client:
@@ -27,6 +27,9 @@ eureka:
 
 camunda:
   bpm:
+    admin-user:
+      id: kermit
+      password: Muppets2018
     application:
       delete-upon-undeploy: false
       scan-for-process-definitions: false
@@ -38,6 +41,10 @@ camunda:
     metrics:
       enabled: false
       db-reporter-activate: false
+
+security:
+  basic:
+    enabled: false
 
 ---
 spring:
